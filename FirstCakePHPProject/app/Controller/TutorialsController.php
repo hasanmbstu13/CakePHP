@@ -6,7 +6,8 @@ class TutorialsController extends AppController
 {
 	public function view()
 	{
-		# code...
+		$request = $this->Tutorial->find('all');
+		$this->set('turorial',$request);
 	}
 	
 	 
