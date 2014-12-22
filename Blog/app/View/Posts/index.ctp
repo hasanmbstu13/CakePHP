@@ -1,3 +1,7 @@
+<?php 
+debug($posts);
+ ?>
+
 <h1>Blog posts</h1>
 <table>
     <tr>
