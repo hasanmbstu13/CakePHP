@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Show All Data</title>
+	<meta charset="UTF-8">
+	<title>Previous Contents</title>
 </head>
 <body>
+	<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<pre>
+     <?php 
+         debug($posts);
+         //debug($count);
+     print_r($posts);
+     pr($posts);
+     ?>
+ </pre>
+ <?php  pr($posts); ?>
+ <?php debug($posts); ?>
+
  <h1>List of <?php echo $count; ?> Blog posts</h1>
- <p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
+
+ <?php echo $this->Html->link('Add Post',array('controller' => 'posts', 'action' => 'add')); ?>
  <table>
     <tr>
         <th>Id</th>
         <th>Title</th>
-        <th>Action</th>
         <th>Created</th>
     </tr>
 
-    <!-- Here's where we loop through our $posts array, printing out post info -->
+    Here is where we loop through our $posts array, printing out post info
 
     <?php foreach ($posts as $post): ?>
         <tr>
@@ -41,7 +59,10 @@
                     </td>
                 </tr>
             <?php endforeach; ?>
-
-        </table> 
+            <?php unset($post); ?>
+        </table>
     </body>
-    </html>
+    </html> -->
+
+</body>
+</html>
