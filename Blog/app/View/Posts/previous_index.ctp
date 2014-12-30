@@ -64,5 +64,34 @@
     </body>
     </html> -->
 
+
+
+      /*    public function delete($id = null)
+          {
+
+            if(!$id || $this->Post->exists($id))
+            //If we want to remove id from the parameter list then we must be set it first
+            //like $this->Post->id = $id;
+            {
+              throw new Exception(__("ID was not set."));        
+            }
+
+            if($this->request->is('post'))
+            {
+              if($this->Post->delete($id))
+              {
+                $this->Session->setFlash('The post was deleted');
+              }
+              else
+              {
+                $this->Session->setFlash('The post was not deleted');
+              }
+            }
+
+            $this->redirect('index');
+          }*/
+
+    
+
 </body>
 </html>

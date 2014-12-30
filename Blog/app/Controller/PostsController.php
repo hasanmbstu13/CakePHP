@@ -63,20 +63,107 @@ class PostsController extends AppController {
             throw new NotFoundException(__('Invalid post'));
           }
 
-          $post = $this->Post->findById($id);
+          $post = $this->Post->findById($id); //this two line of the code is used to populate the form
+          
+
           if (!$post) {
             throw new NotFoundException(__('Invalid post'));
           }
+
+          $this->request->data = $post;
 
           if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Post->save($this->request->data)) { //$this->Post->save($this->request->data) this code is need to pass the data to the Model.
               $this->Session->setFlash(__('Your post has been Updated.'));
               return $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('Unable to Update your post.')); //__() method is used for localization and internalization
+            else
+            {
+                $this->Session->setFlash(__('Unable to Update your post.')); //__() method is used for localization and internalization   
+              }
+            }
           }
 
-          $this->request->data = $post;
+
+          public function delete($id)
+          {
+
+            /*Check to see if an item exists in the database or not in following three ways
+              $this->ModelName->exists($id)
+              $this->ModelName->id = $id;
+              $this->ModelName->exists()
+            */
+
+            $this->Post->id = $id;//if we set the id in this way then we don't need to use parameter in the method exists() or delete()
+
+            if(!$id || !$this->Post->exists()) //exists method check whether a data is present in database or not
+            {
+              throw new Exception(__("ID was not set."));        
+            }
+
+            if($this->request->is('post'))
+            {
+              if($this->Post->delete())
+              {
+                $this->Session->setFlash('The post was deleted');
+              }
+              else
+              {
+                $this->Session->setFlash('The post was not deleted');
+              }
+            }
+
+            $this->redirect('index');
+          }
+
+
+      /*    public function delete($id = null)
+          {
+
+            if(!$id || $this->Post->exists($id))
+            //If we want to remove id from the parameter list then we must be set it first
+            //like $this->Post->id = $id;
+            {
+              throw new Exception(__("ID was not set."));        
+            }
+
+            if($this->request->is('post'))
+            {
+              if($this->Post->delete($id))
+              {
+                $this->Session->setFlash('The post was deleted');
+              }
+              else
+              {
+                $this->Session->setFlash('The post was not deleted');
+              }
+            }
+
+            $this->redirect('index');
+          }*/
+
+         /* public function delete($id) {
+            if ($this->request->is('get')) {
+              throw new MethodNotAllowedException();
+            }
+
+            if ($this->Post->delete($id)) {
+              $this->Session->setFlash(
+                __('The post with id: %s has been deleted.', h($id))
+                );
+              return $this->redirect(array('action' => 'index'));
+            }
+          }
+*/
+
+
+
+       /*public function delete()
+          {
+            $this->redirect('index');
+          }*/
+
+
 
 /*    if ($this->request->is(array('post', 'put'))) {
         $this->Post->id = $id;
@@ -90,9 +177,9 @@ class PostsController extends AppController {
     if (!$this->request->data) {
         $this->request->data = $post;
       }*/
+
+
     }
 
-  }
 
-
-  ?>
+    ?>
