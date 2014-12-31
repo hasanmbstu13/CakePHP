@@ -10,6 +10,7 @@
 	 echo $this->Form->create('Post');
 	 //create method takes the model name;here model name is Post.
 	echo $this->Form->input('title');//input takes the field name in the table
+	//echo $this->Form->input('user_id');
 	echo $this->Form->input('body', array('rows' => '3'));
 	echo $this->Form->end('Save Post');
 	?>

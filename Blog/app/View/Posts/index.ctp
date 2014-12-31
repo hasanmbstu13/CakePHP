@@ -11,6 +11,7 @@
         <tr>
             <th>Id</th>
             <th>Title</th>
+            <th>User Id</th>
             <th>Action</th>
             <th>Created</th>
         </tr>
@@ -28,6 +29,7 @@
                         );
                         ?>
                     </td>
+                    <td><?php echo $post['Post']['user_id']; ?></td>
                     <td>
                         <?php
                         echo $this->Form->postLink(
