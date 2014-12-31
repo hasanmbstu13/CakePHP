@@ -5,6 +5,34 @@ class PostsController extends AppController {
   public $helpers = array('Html', 'Form');
 
 
+  public function search($search = null)
+  {
+
+    if(!$search)
+    {
+      $posts = $this->Post->find('all',array('order' => array('id' => 'desc'))); 
+    }
+    else
+    {
+      $posts = $this->Post->find('all',array('order' => array('id' => 'desc'),
+        'conditions' => array('title LIKE' => '%'.$search.'%')
+        ));
+          //where title like % search %'
+    }
+
+
+        //$count = $this->Post->find('count'); //count is used to return total number of rows from the database. 
+
+    $info = array(
+      'posts' => $posts,
+      'count' => count($posts)
+      );
+    $this->set($info);
+
+    $this->render('index');
+
+  } 
+
       public function view($id = null) //$id = null if id is not set then by default id set with value null.
       {
       	if(!$id)
@@ -57,6 +85,30 @@ class PostsController extends AppController {
           }
         }
 
+/*        public function edit($id = null) {
+          if (!$id) {
+            throw new NotFoundException(__('Invalid post'));
+          }
+
+          $post = $this->Post->findById($id);
+          if (!$post) {
+            throw new NotFoundException(__('Invalid post'));
+          }
+
+          if ($this->request->is(array('post', 'put'))) {
+            $this->Post->id = $id;
+            if ($this->Post->save($this->request->data)) {
+              $this->Session->setFlash(__('Your post has been updated.'));
+              return $this->redirect(array('action' => 'index'));
+            }
+            $this->Session->setFlash(__('Unable to update your post.'));
+          }
+
+          if (!$this->request->data) {
+            $this->request->data = $post;
+          }
+        }
+*/
 
         public function edit($id = null) {
           if (!$id) {
@@ -70,9 +122,14 @@ class PostsController extends AppController {
             throw new NotFoundException(__('Invalid post'));
           }
 
-          $this->request->data = $post;
+          //$this->request->data = $post;
+
+          if (!$this->request->data) {
+            $this->request->data = $post;
+          }
 
           if ($this->request->is('post') || $this->request->is('put')) {
+            //$this->Post->id = $id;
             if ($this->Post->save($this->request->data)) { //$this->Post->save($this->request->data) this code is need to pass the data to the Model.
               $this->Session->setFlash(__('Your post has been Updated.'));
               return $this->redirect(array('action' => 'index'));
