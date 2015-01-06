@@ -33,10 +33,10 @@ class PostsController extends AppController {
 
   } 
 
-      public function view($id = null) //$id = null if id is not set then by default id set with value null.
-      {
-      	if(!$id)
-      	{
+    public function view($id = null) //$id = null if id is not set then by default id set with value null.
+    {
+     if(!$id)
+     {
       		throw new NotFoundException(__("ID was not set.")); //__() is used for internationalizing and localizationing the string.
       	}
 
@@ -45,11 +45,9 @@ class PostsController extends AppController {
       	if (!$data) {
       		throw new Exception(__("ID was not in the Database."));
       		//throw new Exception("ID was not in the Database.");
-      		
       	}
 
       	$this->set('post',$data);
-
       }
 
 
@@ -59,7 +57,7 @@ class PostsController extends AppController {
 
         //$this->set('posts', $this->Post->find('all',array('order' => array('id' => 'desc'))));
 
-        $posts = $this->Post->find('all',array('order' => array('id' => 'desc')));
+        $posts = $this->Post->find('all',array('order' => array('Post.id' => 'desc')));
         $count = $this->Post->find('count'); //count is used to return total number of rows from the database. 
         
         $info = array(
@@ -68,7 +66,7 @@ class PostsController extends AppController {
         	);
         $this->set($info);
 
-/*        $posts = $this->Post->find('all',array('order' => array('id' => 'desc')));
+/*     $posts = $this->Post->find('all',array('order' => array('id' => 'desc')));
         $this->set(compact('count'));
         $this->set('count',$count);*/
       }
@@ -80,10 +78,14 @@ class PostsController extends AppController {
           if ($this->Post->save($this->request->data)) {
             $this->Session->setFlash(__('Your post has been saved.'));
             return $this->redirect(array('action' => 'index'));
-          }
+          }else{
             $this->Session->setFlash(__('Unable to add your post.')); //__() method is used for localization and internalization
           }
         }
+
+        $this->set('users',$this->Post->User->find('list'));
+
+      }
 
 /*        public function edit($id = null) {
           if (!$id) {
@@ -172,71 +174,20 @@ class PostsController extends AppController {
 
             $this->redirect('index');
           }
-
-
-      /*    public function delete($id = null)
-          {
-
-            if(!$id || $this->Post->exists($id))
-            //If we want to remove id from the parameter list then we must be set it first
-            //like $this->Post->id = $id;
-            {
-              throw new Exception(__("ID was not set."));        
-            }
-
-            if($this->request->is('post'))
-            {
-              if($this->Post->delete($id))
-              {
-                $this->Session->setFlash('The post was deleted');
-              }
-              else
-              {
-                $this->Session->setFlash('The post was not deleted');
-              }
-            }
-
-            $this->redirect('index');
-          }*/
-
-         /* public function delete($id) {
-            if ($this->request->is('get')) {
-              throw new MethodNotAllowedException();
-            }
-
-            if ($this->Post->delete($id)) {
-              $this->Session->setFlash(
-                __('The post with id: %s has been deleted.', h($id))
-                );
-              return $this->redirect(array('action' => 'index'));
-            }
-          }
-*/
-
-
-
-       /*public function delete()
-          {
-            $this->redirect('index');
-          }*/
-
-
-
-/*    if ($this->request->is(array('post', 'put'))) {
-        $this->Post->id = $id;
-        if ($this->Post->save($this->request->data)) {
-            $this->Session->setFlash(__('Your post has been updated.'));
-            return $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Unable to update your post.'));
-    }
-
-    if (!$this->request->data) {
-        $this->request->data = $post;
-      }*/
 
 
-    }
 
 
-    ?>
+
+        
+
+
+
+
+
+
+
+
+
+

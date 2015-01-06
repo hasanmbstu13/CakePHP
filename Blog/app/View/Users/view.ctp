@@ -5,7 +5,9 @@
 	<title>View</title>
 </head>
 <body>
-	
+	<pre>
+		<?php print_r($user); ?>
+	</pre>
 	<h1><?php echo h($user['User']['name']); ?></h1>
 
 	<p><small>Email: <?php echo $user['User']['email']; ?></small></p>
