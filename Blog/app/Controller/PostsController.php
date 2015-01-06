@@ -83,8 +83,8 @@ class PostsController extends AppController {
           }
         }
 
-        $this->set('users',$this->Post->User->find('list'));
-
+        $this->set('users',$this->Post->User->find('list'));//This code is used for see all the users name in add form in the field of user_id.
+        //we need the desired id before posting the code.
       }
 
 /*        public function edit($id = null) {
@@ -141,6 +141,12 @@ class PostsController extends AppController {
                 $this->Session->setFlash(__('Unable to Update your post.')); //__() method is used for localization and internalization   
               }
             }
+            $this->set('users',$this->Post->User->find('list'));//write this code before check the post or put method we need the id of the actual list
+            /* users is the table name as a result cakephp recognize it automatically.
+               $this->Post->User->find('list') i.e Post model referencing the User Model.
+               list->means return the id of the list
+               list of the id automatically choose the name or title by default
+            */
           }
 
 

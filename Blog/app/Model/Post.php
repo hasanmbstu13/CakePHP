@@ -1,7 +1,7 @@
 <?php 
 
 class Post extends AppModel{
-		public $belongsTo = 'User';
+		public $belongsTo = 'User'; //many to one relationship
 /*	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
