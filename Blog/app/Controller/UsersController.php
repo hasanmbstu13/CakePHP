@@ -29,6 +29,16 @@ class UsersController extends AppController {
 
   } 
 
+  public function login()
+  {
+
+  }
+
+  public function logout()
+  {
+    
+  }
+
       public function view($id = null) //$id = null if id is not set then by default id set with value null.
       {
       	if(!$id)
