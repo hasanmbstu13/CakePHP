@@ -3,6 +3,11 @@ class UsersController extends AppController {
 
   public $helpers = array('Html', 'Form');
 
+  public function beforeFilter()
+  {
+    parent::beforeFilter();
+    $this->Auth->allow('add');
+  }
 
   public function search($search = null)
   {
@@ -31,14 +36,26 @@ class UsersController extends AppController {
 
   public function login()
   {
+    if($this->request->is('post'))
+    {
+      if($this->Auth->login())
+      {
+        return $this->redirect($this->Auth->redirectUrl());
+        //return $this->redirect->('/Users/index');
+         //$this->redirect->('add');
+      }
+
+      $this->Session->setFlash(__('Invalid username or password, try again'));
+    }
 
   }
 
-  public function logout()
+/*  public function logout()
   {
-    
+    $this->Auth->logout();
+    $this->redirect->('/Users/index');
   }
-
+*/
       public function view($id = null) //$id = null if id is not set then by default id set with value null.
       {
       	if(!$id)

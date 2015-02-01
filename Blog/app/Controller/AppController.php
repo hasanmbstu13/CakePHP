@@ -13,7 +13,14 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-		public $components = array('DebugKit.Toolbar','Session');
+		
+		public $helpers = array('Html', 'Form', 'Session');
+		public $components = array('DebugKit.Toolbar','Session','Auth');
+
+		public function beforeFilter()
+		{
+			$this->Auth->allow('index');
+		}
 		
 
 }
