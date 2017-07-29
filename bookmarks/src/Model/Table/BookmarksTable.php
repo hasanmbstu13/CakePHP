@@ -65,11 +65,17 @@ class BookmarksTable extends Table
 
         $validator
             ->requirePresence('title', 'create')
-            ->notEmpty('title');
+            ->notEmpty('title')
+            ->add('title', 'notUrl', [
+                'rule' => 'notUrl',
+                'provider' => 'table',
+                'message' => 'The title field can not be a url',
+            ]);
 
         $validator
             ->requirePresence('url', 'create')
-            ->notEmpty('url');
+            ->notEmpty('url')
+            ->add('url', 'url', ['rule' => ['url']]);
 
         return $validator;
     }
@@ -86,5 +92,10 @@ class BookmarksTable extends Table
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
+    }
+
+    public function notUrl($value, array $context)
+    {
+        return !(\Cake\Validation\Validation::url($value));
     }
 }

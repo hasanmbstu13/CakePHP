@@ -12,6 +12,9 @@ use App\Controller\AppController;
  */
 class TagsController extends AppController
 {
+    public $paginate = [
+        'order' => ['Tags.name' => 'ASC'],
+    ];
 
     /**
      * Index method
@@ -56,7 +59,9 @@ class TagsController extends AppController
             if ($this->Tags->save($tag)) {
                 $this->Flash->success(__('The tag has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                // redirect as our instructed mehtod
+                return $this->redirect(['controller' => 'Bookmarks', 'action' => 'index']);
+                // return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The tag could not be saved. Please, try again.'));
         }

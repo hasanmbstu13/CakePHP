@@ -29,4 +29,9 @@ class Tag extends Entity
         '*' => true,
         'id' => false
     ];
+
+    protected function _setName($name)
+    {
+        return mb_strtolower($name);
+    }
 }

@@ -21,7 +21,7 @@ class BookmarksController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users','Tags']
         ];
         $bookmarks = $this->paginate($this->Bookmarks);
 
@@ -29,8 +29,14 @@ class BookmarksController extends AppController
         $this->set('_serialize', ['bookmarks']);
     }
 
-    public function export() {
-        $bookmarks = $this->Bookmarks->find('all');
+    public function export($limit = 100) {
+        $bookmarks = $this->Bookmarks->find('all')->limit($limit)
+            ->where(['user_id' => 1])
+            ->contain(['Tags' => function ($q){
+                return $q->where(['Tags.name LIKE' => '%t%']);
+            }]);
+        // The first name of the set method is the variable name that will be available in view layer
+        // And the second one is the value of this varialbe
         $this->set('bookmarks', $bookmarks);
     }
 

@@ -42,6 +42,7 @@ class TagsTable extends Table
 
         $this->belongsToMany('Bookmarks', [
             'foreignKey' => 'tag_id',
+            // targetForeignKey bookmark_id means in target mapping table for this table Bookmarks id is bookmark_id
             'targetForeignKey' => 'bookmark_id',
             'joinTable' => 'bookmarks_tags'
         ]);

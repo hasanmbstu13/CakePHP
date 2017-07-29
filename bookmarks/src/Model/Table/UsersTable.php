@@ -43,6 +43,11 @@ class UsersTable extends Table
         $this->hasMany('Bookmarks', [
             'foreignKey' => 'user_id'
         ]);
+
+        $this->hasOne('LastBookmarks', [
+            'className' => 'Bookmarks',
+            'foreignKey' => 'user_id',
+        ]);
     }
 
     /**
@@ -68,7 +73,8 @@ class UsersTable extends Table
 
         $validator
             ->requirePresence('firstname', 'create')
-            ->notEmpty('firstname');
+            ->notEmpty('firstname')
+            ->add('firstname', 'minLength', ['rule' => ['minLength', 3]]);
 
         $validator
             ->requirePresence('lastname', 'create')

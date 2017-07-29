@@ -31,7 +31,7 @@
                 <td><?= $this->Number->format($user->id) ?></td>
                 <td><?= h($user->email) ?></td>
                 <td><?= h($user->password) ?></td>
-                <td><?= h($user->firstname) ?></td>
+                <td><?= h($user->name) ?></td>
                 <td><?= h($user->lastname) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>

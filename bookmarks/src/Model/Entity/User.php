@@ -33,6 +33,11 @@ class User extends Entity
         'id' => false
     ];
 
+    protected function _getName()
+    {
+        return $this->firstname. ' ' .$this->lastname;
+    }
+
     /**
      * Fields that are excluded from JSON versions of the entity.
      *
