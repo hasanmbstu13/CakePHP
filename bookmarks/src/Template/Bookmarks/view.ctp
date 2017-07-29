@@ -4,6 +4,8 @@
   * @var \App\Model\Entity\Bookmark $bookmark
   */
 ?>
+<!-- Overwrite the default title is by using assign method -->
+<!-- Then we can add our additional title  -->
 <?php $this->assign('title', $bookmark->title ); ?>
 <?php $this->prepend('title', 'View ') ?>
 <?php $this->append('title', ' Bookmark') ?>
